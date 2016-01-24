@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head
+<meta charset="utf-8">
+<style>
+
+.chart div {
+  font: 10px sans-serif;
+  background-color: steelblue;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  color: white;
+}
+
+</style>
+</head>
+<body>
+<svg width="297mm" height="208mm" viewBox="0 0 297 208"/>
+<svg width="297mm" height="208mm" viewBox="0 0 297 208"/>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+var svg = d3.selectAll("svg").data([1, 2]).append("g");
+//var svg = d3.select("svg");
+svg.append("rect")
+   .attr("x", 0)
+   .attr("y", 0)
+   .attr("width", 290)
+   .attr("height", 198)
+   .style("stroke", 'black')
+   .style("fill", 'none')
+   .style("stroke-width", 1);
+
+var circle = svg.selectAll("circle")
+    .data([12, 27, 40, 60]);
+
+var circleEnter = circle.enter().append("circle");
+
+circleEnter.attr("cy", 60);
+circleEnter.attr("cx", function(d, i) { return i * 50 + 30; });
+circleEnter.attr("r", function(d) { return Math.sqrt(d); });
+</script>
+</body>
+</html>
