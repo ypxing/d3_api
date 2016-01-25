@@ -1,27 +1,26 @@
 var d3 = require("d3");
-var ReactDOMServer = require("react-dom/server");
 var React = require("react");
-var ReactDOM = require("react-dom");
 var _ = require("lodash");
-
-var Svgg = require("./svgg").Svgg;
-
-var xScale = d3.scale.linear().domain([0, 1]);
-
-var jsdom = require('jsdom')
-
-// setup the simplest document possible
-// var doc = jsdom.jsdom('<!doctype html><html><body><svg class="container"></svg></body></html>')
-var doc = require("./jsdom").jsDoc;
-var container = require("./jsdom").jsContainer;
-
-var height = 0;
-
-// var container = win.document.querySelector('.container');
 
 //scale, oritent, tickValues, innerTickSize, outertickSize, leftOffset, topOffset
 //labelXOffset, labelYOffset
 exports.Axis = React.createClass({
+  _d3_setter: function(dest, src, properties, funcName) {
+    _.forEach(properties, function(item) {
+      if (src[item]) {
+        funcName ? dest[funcName](item, src[item]) : dest[item](src[item])
+      }
+    });
+  },
+
+  // _d3_attrSetter: function(dest, src, properties, funcName = 'attr') {
+  //   _.forEach(properties, function(item) {
+  //     if (src[item]) {
+  //       dest
+  //     }
+  //   });
+  // },
+
   _d3_render: function() {
     var props = this.props;
 
@@ -38,19 +37,20 @@ exports.Axis = React.createClass({
       }
     });
 
-    d3.select(this.refs.axis)
+    var d3_text = d3.select(this.refs.axis)
         .attr("class", "x axis")
-        .attr("transform", `translate(${props.leftOffset}, ${props.topOffset})`)
+        .attr("transform", `translate(${props.leftOffset || 0}, ${props.topOffset || 0})`)
         .call(d3_axis)
       .selectAll("text")
-        .attr("y", props.labelYOffset || 6)
-        .attr("x", props.labelXOffset || 6)
+        // .attr("y", props.labelYOffset || 6)
+        // .attr("x", props.labelXOffset || 6)
         .style("text-anchor", props.textAnchor || "start");
+
+    this._d3_setter(d3_text, { x: props.labelXOffset, y: props.labelYOffset }, ["x", "y"], "attr");
   },
 
   componentDidMount: function() {
     this._d3_render();
-    // console.log(container.innerHTML);
   },
 
   render: function() {

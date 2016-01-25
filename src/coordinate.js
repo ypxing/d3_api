@@ -13,27 +13,30 @@ var margin = {top: 250, right: 40, bottom: 250, left: 40},
 var xScale = d3.scale.linear().domain([0, 1]).range([0, 500]);
 var yScale = d3.scale.linear().domain([0, 1]).range([100, 0]);
 
-class QAPReport extends React.Component {
+class Coordinate extends React.Component {
   componentDidMount() {
     console.log(htmlString());
   }
 
   render() {
+    var props = this.props;
+    // need to handle < 0 case
+    var yTopOffset = props.xTopOffset - d3.max(props.yScale.range());
+
     return (
-      <g transform={"translate(" + margin.left + ", " + margin.top + ")"}>
+      <g transform={`translate(${props.left}, ${props.top})`}>
         <Axis
           orient="bottom"
           tickValues={[.1, .2, .3, .4]}
-          scale={xScale} innerTickSize="-50"
-          topOffset="200"
-          leftOffset="0"
+          scale={props.xScale}
+          topOffset={props.xTopOffset}
           textAnchor="middle" />
         <Axis
           orient="left"
           tickValues={[.1, .2, .3, .4]}
-          scale={yScale} innerTickSize="-50"
-          topOffset="100"
-          leftOffset="0"
+          scale={props.yScale}
+          topOffset={yTopOffset}
+          labelXOffset="-14"
           textAnchor="middle" />
       </g>
     )
@@ -41,5 +44,5 @@ class QAPReport extends React.Component {
 }
 
 // console.log(ReactDOMServer.renderToString(<QAPReport />));
-ReactDOM.render(<QAPReport />, jsContainer)
+ReactDOM.render(<Coordinate left={margin.left} top={margin.top} xScale={xScale} yScale={yScale} xTopOffset="200" />, jsContainer)
 
