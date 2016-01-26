@@ -1,6 +1,7 @@
 var jsdom = require('jsdom')
+var path = require("path")
 // setup the simplest document possible
-export const jsHeader = '<!doctype html><html><head><style>.axis text { font: 10px sans-serif; } .axis line, .axis path { fill: none; stroke: #000; shape-rendering: crispEdges; }</style></head><body><svg width="297mm" height="210mm" class="container">'
+export const jsHeader = `<!doctype html><html><head><link rel="stylesheet" type="text/css" href="${path.join(__dirname, "../src")}/style.css"></head><body><svg width="297mm" height="210mm" class="container">`
 export const jsFooter = '</svg></body></html>'
 
 export function htmlString(body) {
