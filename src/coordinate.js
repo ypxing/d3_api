@@ -6,16 +6,14 @@ import ReactDOMServer from "react-dom/server"
 import { jsDoc, jsContainer, htmlString } from "./jsdom"
 import { Axis } from "./axis"
 
-var margin = {top: 250, right: 40, bottom: 250, left: 40},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+var margin = {top: 250, right: 40, bottom: 250, left: 40}
 
 var xScale = d3.scale.linear().domain([0, 1]).range([0, 500]);
 var yScale = d3.scale.linear().domain([0, 1]).range([100, 0]);
 
-class Coordinate extends React.Component {
+export default class Coordinate extends React.Component {
   componentDidMount() {
-    console.log(htmlString());
+    // console.log(htmlString());
   }
 
   render() {
@@ -24,7 +22,7 @@ class Coordinate extends React.Component {
     var yTopOffset = props.xTopOffset - d3.max(props.yScale.range());
 
     return (
-      <g transform={`translate(${props.left}, ${props.top})`}>
+      <g transform={`translate(${props.left || 0}, ${props.top || 0})`}>
         <Axis
           orient="bottom"
           tickValues={[.1, .2, .3, .4]}
@@ -44,5 +42,8 @@ class Coordinate extends React.Component {
 }
 
 // console.log(ReactDOMServer.renderToString(<QAPReport />));
-ReactDOM.render(<Coordinate left={margin.left} top={margin.top} xScale={xScale} yScale={yScale} xTopOffset="200" />, jsContainer)
+ReactDOM.render(<Coordinate
+  left="40" top="20"
+  xScale={xScale} yScale={yScale} xTopOffset="100" />,
+  jsContainer)
 
