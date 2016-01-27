@@ -1,11 +1,21 @@
 import d3 from "d3"
 import React from "react"
 import ReactDOM from "react-dom"
-import ReactDOMServer from "react-dom/server"
+
+import IntervalNormalizer from "./IntervalNormalizer"
 
 import { Axis } from "./axis"
 
 export default class Coordinate extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+    this.IntervalNormalizer = new IntervalNormalizer(props.yScale)
+  }
+
+  yScale() {
+
+  }
+
   componentDidMount() {
   }
 
@@ -24,10 +34,9 @@ export default class Coordinate extends React.Component {
           textAnchor="middle" />
         <Axis
           orient="left"
-          tickValues={props.tickValues}
+          tickValues={props.tickValues || this.IntervalNormalizer.tickValues()}
           outerTickSize="0"
-          evenInterval={true}
-          scale={props.yScale}
+          scale={props.yScale.domain(this.IntervalNormalizer.domain())}
           topOffset={yTopOffset}
           labelXOffset="-14"
           textAnchor="middle" />

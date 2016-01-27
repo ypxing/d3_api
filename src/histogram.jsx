@@ -25,12 +25,12 @@ export default class Histogram extends React.Component {
         .attr("width", props.xScale(data[0].dx) - 1)
         .attr("height", function(d) { return height - props.yScale(d.y); });
 
-    bar.append("text")
-        .attr("dy", ".75em")
-        .attr("y", 6)
-        .attr("x", props.xScale(data[0].dx) / 2)
-        .attr("text-anchor", "middle")
-        .text(function(d) { return formatCount(d.y); });
+    // bar.append("text")
+    //     .attr("dy", ".75em")
+    //     .attr("y", 6)
+    //     .attr("x", props.xScale(data[0].dx) / 2)
+    //     .attr("text-anchor", "middle")
+    //     .text(function(d) { return formatCount(d.y); });
   }
 
   componentDidMount() {
