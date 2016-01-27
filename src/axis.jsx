@@ -13,14 +13,6 @@ exports.Axis = React.createClass({
     });
   },
 
-  // _d3_attrSetter: function(dest, src, properties, funcName = 'attr') {
-  //   _.forEach(properties, function(item) {
-  //     if (src[item]) {
-  //       dest
-  //     }
-  //   });
-  // },
-
   _d3_render: function() {
     var props = this.props;
 
@@ -31,19 +23,13 @@ exports.Axis = React.createClass({
     //oritent: orient of tick
     //innerTickSize: size of ticks towards oritent
     //outerTickSize: size of "start" and "stop" ticks towards oritent
-    _.forEach(["tickValues", "innerTickSize", "outerTickSize"], function(item) {
-      if (props[item]) {
-        d3_axis[item](props[item])
-      }
-    });
+    this._d3_setter(d3_axis, props, ["tickValues", "innerTickSize", "outerTickSize"]);
 
     var d3_text = d3.select(this.refs.axis)
         .attr("class", "x axis")
         .attr("transform", `translate(${props.leftOffset || 0}, ${props.topOffset || 0})`)
         .call(d3_axis)
       .selectAll("text")
-        // .attr("y", props.labelYOffset || 6)
-        // .attr("x", props.labelXOffset || 6)
         .style("text-anchor", props.textAnchor || "start");
 
     this._d3_setter(d3_text, { x: props.labelXOffset, y: props.labelYOffset }, ["x", "y"], "attr");
