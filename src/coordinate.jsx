@@ -18,8 +18,6 @@ export default class Coordinate extends React.Component {
       <g transform={`translate(${props.left || 0}, ${props.top || 0})`}>
         <Axis
           orient="bottom"
-          tickValues={[.1, .2, .3, .4]}
-          innerTickSize="0"
           outerTickSize="0"
           scale={props.xScale}
           topOffset={props.xTopOffset}

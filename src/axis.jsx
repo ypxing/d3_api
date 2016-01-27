@@ -19,11 +19,6 @@ exports.Axis = React.createClass({
 
   // assume min of domain is 0
   _tick_interval() {
-    if (this.props.interval)
-    {
-      return this.props.interval;
-    }
-
     var _max = d3.max(this.props.scale.domain());
     if (_max <= 50)
     {
@@ -43,20 +38,35 @@ exports.Axis = React.createClass({
     return 250;
   },
 
-  // assume min of domain is 0
   _axis_domain() {
-    var _max = d3.max(this.props.scale.domain());
+    var _domain = this.props.scale.domain();
+    var _max = d3.max(_domain);
 
     if (this.props.evenInterval) {
       var interval = this._tick_interval()
       _max = Math.ceil(_max / interval) * interval;
     }
 
-    return [0, _max]
+    return [d3.min(_domain), _max]
   },
 
   _axis_class() {
     return (this._is_y() ? "x" : "y") + " axis";
+  },
+
+  _axis_ticks() {
+    var _ticks = [];
+    var _max = d3.max(this._axis_domain());
+    var _interval = this._tick_interval();
+
+    _.forEach(d3.range(_max/_interval + 1), function(i) {
+        if (i > 0) {
+          _ticks.push(i * _interval);
+        }
+      }
+    );
+
+    return _ticks;
   },
 
   _d3_render: function() {
@@ -65,6 +75,10 @@ exports.Axis = React.createClass({
     var d3_axis = d3.svg.axis()
           .scale(props.scale.domain(this._axis_domain()))
           .orient(props.orient);
+
+    if (props.evenInterval) {
+      d3_axis.tickValues(this._axis_ticks());
+    }
 
     //oritent: orient of tick
     //innerTickSize: size of ticks towards oritent
