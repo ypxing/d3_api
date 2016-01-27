@@ -11,5 +11,6 @@ var data = d3.layout.histogram()
     (values);
 
 data = d3.layout.histogram();
-console.log(x.ticks(20).length);
-console.log(data([1, 2, 2, 2]));
+//console.log(x.ticks(20).length);
+//console.log(data([1, 2, 2, 2]));
+console.log(x.rangeExtend());

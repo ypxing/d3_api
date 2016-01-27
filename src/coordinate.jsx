@@ -5,11 +5,6 @@ import ReactDOMServer from "react-dom/server"
 
 import { Axis } from "./axis"
 
-var margin = {top: 250, right: 40, bottom: 250, left: 40}
-
-var xScale = d3.scale.linear().domain([0, 1]).range([0, 500]);
-var yScale = d3.scale.linear().domain([0, 1]).range([100, 0]);
-
 export default class Coordinate extends React.Component {
   componentDidMount() {
   }
@@ -32,8 +27,8 @@ export default class Coordinate extends React.Component {
         <Axis
           orient="left"
           tickValues={props.tickValues}
-          innerTickSize="0"
           outerTickSize="0"
+          evenInterval={true}
           scale={props.yScale}
           topOffset={yTopOffset}
           labelXOffset="-14"
