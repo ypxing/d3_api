@@ -38,8 +38,14 @@ export default class Coordinate extends React.Component {
           outerTickSize="0"
           scale={props.yScale.domain(this.IntervalNormalizer.domain())}
           topOffset={yTopOffset}
-          labelXOffset="-14"
-          textAnchor="middle" />
+          textAnchor="end" />
+        <Axis
+          orient="left"
+          tickValues={props.tickValues || this.IntervalNormalizer.tickValues()}
+          innerTickSize={-d3.max(props.xScale.range())}
+          scale={props.yScale.domain(this.IntervalNormalizer.domain())}
+          topOffset={yTopOffset}
+          tickFormat="" />
       </g>
     )
   }

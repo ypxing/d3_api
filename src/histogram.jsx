@@ -17,6 +17,7 @@ export default class Histogram extends React.Component {
     var props = this.props;
     var height = d3.max(props.yScale.range());
     var data = props.data;
+    var barWidth = props.xScale(data[0].dx + d3.min(props.xScale.domain()));
 
     this.bar = svg.selectAll(".bar")
         .data(data)
@@ -26,15 +27,15 @@ export default class Histogram extends React.Component {
 
     this.bar.append("rect")
         .attr("x", 1)
-        .attr("width", props.xScale(data[0].dx) - 1)
+        .attr("width", barWidth - 1)
         .attr("height", function(d) { return height - props.yScale(d.y); });
 
-    this.bar.append("text")
-        .attr("dy", ".75em")
-        .attr("y", 6)
-        .attr("x", props.xScale(data[0].dx) / 2)
-        .attr("text-anchor", "middle")
-        .text(function(d) { return formatCount(d.y); });
+    // this.bar.append("text")
+    //     .attr("dy", ".75em")
+    //     .attr("y", 6)
+    //     .attr("x", barWidth / 2)
+    //     .attr("text-anchor", "middle")
+    //     .text(function(d) { return formatCount(d.y); });
   }
 
   componentDidUpdate() {
