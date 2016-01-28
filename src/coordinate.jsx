@@ -42,6 +42,7 @@ export default class Coordinate extends React.Component {
         <Axis
           orient="left"
           tickValues={props.tickValues || this.IntervalNormalizer.tickValues()}
+          outerTickSize="0"
           innerTickSize={-d3.max(props.xScale.range())}
           scale={props.yScale.domain(this.IntervalNormalizer.domain())}
           topOffset={yTopOffset}
