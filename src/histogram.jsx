@@ -6,6 +6,10 @@ import ReactDOMServer from "react-dom/server"
 import Coordinate from "./coordinate"
 
 export default class Histogram extends React.Component {
+  constructor(props, context) {
+    super(props, context)
+  }
+
   _d3_render() {
     if (this.bar) {
       this.bar.remove();
