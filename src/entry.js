@@ -59,10 +59,6 @@ var format = (x, i) => {
   return label
 }
 
-console.log(ticks);
-console.log(tickValues);
-console.log(fixMin, fixMax)
-
 //var values = d3.range(1000).map(d3.random.bates(10));
 var values = d3.range(1000).map((i)=>(d3.random.bates(10)(i) * (max - min) + min));
 
@@ -78,7 +74,6 @@ var data = d3.layout.histogram()
     .bins(ticks)
     (values);
 
-console.log(data.length)
 var yScale = d3.scale.linear()
     .domain([0, d3.max(data, function(d) { return d.y; })])
     .range([height, 0]);

@@ -3,9 +3,7 @@ import React from "react"
 import ReactDOM from "react-dom"
 import ReactDOMServer from "react-dom/server"
 
-import Coordinate from "./coordinate"
-
-export default function createHistogram(component) {
+export default function createHistogram(Component) {
   return class Histogram extends React.Component {
     constructor(props, context) {
       super(props, context)
@@ -56,14 +54,7 @@ export default function createHistogram(component) {
 
       return (
         <g ref="histogram" transform={`translate(${props.left || 0}, ${props.top || 0})`}>
-          { component.beforeCoordinate ? component.beforeCoordinate(props) : null }
-          <Coordinate
-            xScale={props.xScale}
-            xTopOffset="100"
-            xtickFormat={props.xtickFormat}
-            xtickValues={props.xtickValues}
-            yScale={props.yScale} />
-          { component.afterCoordinate ? component.afterCoordinate(props) : null }
+          <Component {...this.props} {...this.state} />
         </g>
       )
     }

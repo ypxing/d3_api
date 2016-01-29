@@ -36,8 +36,8 @@ exports.Axis = React.createClass({
     this._d3_setter(d3_axis, props, ["tickValues", "innerTickSize", "outerTickSize", "tickFormat"]);
 
     var d3_text = d3.select(this.refs.axis)
-        .attr("class", this._axis_class())
-        .attr("transform", `translate(${props.leftOffset || 0}, ${props.topOffset || 0})`)
+        // .attr("class", this._axis_class())
+        // .attr("transform", `translate(${props.leftOffset || 0}, ${props.topOffset || 0})`)
         .call(d3_axis)
       .selectAll("text")
         .style("text-anchor", props.textAnchor || "start");
@@ -54,7 +54,11 @@ exports.Axis = React.createClass({
   },
 
   render: function() {
-    return <g ref="axis" />;
+    var props = this.props;
+    return (
+      <g className={this._axis_class()}
+         transform={`translate(${props.left || 0}, ${props.top || 0})`}
+         ref="axis" />);
   }
 });
 
