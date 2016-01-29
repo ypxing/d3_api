@@ -9,29 +9,36 @@ export default function createHistogram(Component) {
       super(props, context)
     }
 
+    fromSubComponent(attr) {
+      return this.props[attr] || this.commonData[attr]
+    }
+
     _d3_render() {
       if (this.bar) {
         this.bar.remove();
       }
 
+      var xScale = this.fromSubComponent("xScale")
+      var yScale = this.fromSubComponent("yScale")
+      var data = this.fromSubComponent("data")
+
       // A formatter for counts.
       var formatCount = d3.format(",.0f");
       var svg = d3.select(this.refs.histogram);
       var props = this.props;
-      var height = d3.max(props.yScale.range());
-      var data = props.data;
-      var barWidth = props.xScale(data[0].dx + d3.min(props.xScale.domain()));
+      var height = d3.max(yScale.range());
+      var barWidth = xScale(data[0].dx + d3.min(xScale.domain()));
 
       this.bar = svg.selectAll(".bar")
           .data(data)
         .enter().append("g")
           .attr("class", "bar")
-          .attr("transform", function(d) { return "translate(" + props.xScale(d.x) + "," + props.yScale(d.y) + ")"; });
+          .attr("transform", function(d) { return "translate(" + xScale(d.x) + "," + yScale(d.y) + ")"; });
 
       this.bar.append("rect")
           .attr("x", 1)
           .attr("width", barWidth - 3)
-          .attr("height", function(d) { return height - props.yScale(d.y); });
+          .attr("height", function(d) { return height - yScale(d.y); });
 
       // this.bar.append("text")
       //     .attr("dy", ".75em")
@@ -54,7 +61,7 @@ export default function createHistogram(Component) {
 
       return (
         <g ref="histogram" transform={`translate(${props.left || 0}, ${props.top || 0})`}>
-          <Component {...this.props} {...this.state} />
+          <Component parentComponent={this} {...this.props} {...this.state} />
         </g>
       )
     }
