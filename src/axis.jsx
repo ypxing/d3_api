@@ -33,11 +33,10 @@ exports.Axis = React.createClass({
     //oritent: orient of tick
     //innerTickSize: size of ticks towards oritent
     //outerTickSize: size of "start" and "stop" ticks towards oritent
-    this._d3_setter(d3_axis, props, ["tickValues", "innerTickSize", "outerTickSize", "tickFormat"]);
+    //tickPadding: padding between axis and labels
+    this._d3_setter(d3_axis, props, ["tickValues", "innerTickSize", "outerTickSize", "tickFormat", "tickPadding"]);
 
     var d3_text = d3.select(this.refs.axis)
-        // .attr("class", this._axis_class())
-        // .attr("transform", `translate(${props.leftOffset || 0}, ${props.topOffset || 0})`)
         .call(d3_axis)
       .selectAll("text")
         .style("text-anchor", props.textAnchor || "start");
@@ -53,13 +52,38 @@ exports.Axis = React.createClass({
     this._d3_render();
   },
 
+  label() {
+    if (!this.props.label || this.props.orient === "right" || this.props.orient === "top") {
+      return
+    }
+
+    if (this.props.orient === "left") {
+      return (
+        <text transform="rotate(-90)"
+          y={-(+this.props.titlePadding + (this.props.tickPadding || 0))}
+          x={-d3.max(this.props.scale.range())/2} dy=".71em"
+          style={{textAnchor: "middle"}}>{this.props.label}</text>
+      )
+    }
+
+    if (this.props.orient === "bottom") {
+      return (
+        <text
+          y={(+this.props.titlePadding + (this.props.tickPadding || 0))}
+          x={d3.max(this.props.scale.range())/2} dy=".71em"
+          style={{textAnchor: "middle"}}>{this.props.label}</text>
+      )
+    }
+  },
+
   render: function() {
     var props = this.props;
     return (
       <g className={this._axis_class()}
          transform={`translate(${props.left || 0}, ${props.top || 0})`}
-         ref="axis" />);
+         ref="axis">
+         {this.label()}
+      </g>
+    );
   }
 });
-
-// ReactDOM.render(<exports.Axis orient="bottom" tickValues={[1, 2, 3, 4]} scale={xScale} />, container);

@@ -12,13 +12,6 @@ export default class Coordinate extends React.Component {
     this.IntervalNormalizer = new IntervalNormalizer(props.yScale)
   }
 
-  yScale() {
-
-  }
-
-  componentDidMount() {
-  }
-
   render() {
     var props = this.props;
     // need to handle < 0 case
@@ -33,7 +26,11 @@ export default class Coordinate extends React.Component {
           top={props.xTop}
           tickValues={props.xtickValues}
           tickFormat={props.xtickFormat}
-          textAnchor={props.xtextAnchor || "middle"} />
+          textAnchor={props.xtextAnchor || "middle"}
+          titlePadding="25"
+          label="Median Value" />
+
+        {/* grid */}
         <Axis
           orient="bottom"
           outerTickSize="0"
@@ -49,7 +46,11 @@ export default class Coordinate extends React.Component {
           outerTickSize="0"
           scale={props.yScale.domain(this.IntervalNormalizer.domain())}
           top={yTop}
-          textAnchor={props.xtextAnchor || "end"} />
+          titlePadding="45"
+          textAnchor={props.xtextAnchor || "end"}
+          label="No. of Laboratories" />
+
+        {/* grid */}
         <Axis
           orient="left"
           tickValues={props.tickValues || this.IntervalNormalizer.tickValues()}

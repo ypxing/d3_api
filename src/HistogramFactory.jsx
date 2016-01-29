@@ -23,7 +23,6 @@ export default function createHistogram(Component) {
       var data = this.fromSubComponent("data")
 
       // A formatter for counts.
-      var formatCount = d3.format(",.0f");
       var svg = d3.select(this.refs.histogram);
       var props = this.props;
       var height = d3.max(yScale.range());
@@ -40,6 +39,7 @@ export default function createHistogram(Component) {
           .attr("width", barWidth - 3)
           .attr("height", function(d) { return height - yScale(d.y); });
 
+      // var formatCount = d3.format(",.0f");
       // this.bar.append("text")
       //     .attr("dy", ".75em")
       //     .attr("y", 6)

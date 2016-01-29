@@ -79,11 +79,10 @@ class NumericHistogram extends React.Component {
     var xDomain = [bins[0], bins[this.binNum]]
     var firstIdx = Math.floor(this.binNum/3)
     var secondIdx = Math.floor(this.binNum*2/3)
-    var thirdIdx = Math.floor(this.binNum*3/3)
     var binaryIdx = Math.floor(this.binNum/2)
 
     // 0, 10, 15, 20, 30
-    var xtickValues = [0, firstIdx, binaryIdx, secondIdx, thirdIdx].map(x => bins[x] + this.step()/2)
+    var xtickValues = [0, firstIdx, binaryIdx, secondIdx, this.binNum - 1].map(x => bins[x] + this.step()/2)
 
     //var values = d3.range(1000).map(d3.random.bates(10));
     var values = d3.range(1000).map((i)=>(d3.random.bates(10)(i) * (xDomain[1] - xDomain[0]) + xDomain[0]));
@@ -112,17 +111,17 @@ class NumericHistogram extends React.Component {
       <g>
         <rect
           width={shadowWidth - 1}
-          height="100"
+          height={props.height}
           className="histoShadow" />
         <rect
           transform={`translate(${shadowOffset}, 0)`}
           width={xScale(data[firstIdx].x)}
-          height="100"
+          height={props.height}
           className="histoShadow" />
 
         <Coordinate
           xScale={xScale}
-          xTop="100"
+          xTop={props.height}
           xtickFormat={this.xtickFormat}
           xtickValues={xtickValues}
           gxtickValues={[xScale.invert(shadowWidth - 1), data[secondIdx + 1].x, d3.max(xScale.domain())]}
