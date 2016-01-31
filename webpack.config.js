@@ -18,7 +18,8 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         include: path.join(__dirname, 'src'),
         loaders: ['react-hot', 'babel?presets[]=react,presets[]=es2015']
-      }
+      },
+      //{ test: require.resolve("react"), loader: "imports?shim=es5-shim/es5-shim&sham=es5-shim/es5-sham" }
     ]
   }
 };
