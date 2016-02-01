@@ -1,10 +1,19 @@
 {
   "dependencies": {
     "d3": "^3.5.13",
+    "es6-promise": "^3.0.2",
+    "history": "^1.17.0",
+    "immutable": "^3.7.6",
     "lodash": "^4.0.0",
+    "mirror-creator": "^1.0.0",
     "moment": "^2.11.1",
     "react": "^0.14.6",
-    "react-dom": "^0.14.6"
+    "react-dom": "^0.14.6",
+    "react-redux": "^4.1.2",
+    "react-router": "^1.0.3",
+    "redux": "^3.1.7",
+    "redux-simple-router": "^2.0.4",
+    "redux-thunk": "^1.0.3"
   },
   "devDependencies": {
     "babel-core": "^6.4.5",
@@ -15,5 +24,36 @@
     "react-hot-loader": "^1.3.0",
     "webpack": "^1.12.12",
     "webpack-dev-server": "^1.14.1"
-  }
+  },
+  "name": "react-d3-render",
+  "version": "0.0.1",
+  "description": "Use d3's way to create Reactjs Components",
+  "main": "./lib/index.js",
+  "scripts": {
+    "build:lib": "babel src --out-dir lib",
+    "build:umd": "webpack src/index.js dist/react-redux.js --config webpack.config.development.js",
+    "build:umd:min": "webpack src/index.js dist/react-redux.min.js --config webpack.config.production.js",
+    "build": "npm run build:lib && npm run build:umd && npm run build:umd:min",
+    "clean": "rimraf lib dist coverage",
+    "lint": "eslint src test",
+    "prepublish": "npm run clean && npm run build",
+    "test": "mocha --compilers js:babel-core/register --recursive --require ./test/setup.js",
+    "test:watch": "npm test -- --watch",
+    "test:cov": "babel-node ./node_modules/isparta/bin/isparta cover ./node_modules/mocha/bin/_mocha -- --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ypxing/d3_api.git"
+  },
+  "keywords": [
+    "react",
+    "d3",
+    "render"
+  ],
+  "author": "Yunpeng Xing",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ypxing/d3_api/issues"
+  },
+  "homepage": "https://github.com/ypxing/d3_api#readme"
 }
