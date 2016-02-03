@@ -9,7 +9,23 @@ import { Axis } from "./axis"
 export default class Coordinate extends React.Component {
   constructor(props, context) {
     super(props, context);
-    this.IntervalNormalizer = new IntervalNormalizer(props.yScale)
+    if (props.normalizeYAxis) {
+      this.IntervalNormalizer = new IntervalNormalizer(props.yScale)
+    }
+  }
+
+  yScale() {
+    if (this.IntervalNormalizer) {
+      return this.props.yScale.domain(this.IntervalNormalizer.domain())
+    }
+    else
+    {
+      return this.props.yScale
+    }
+  }
+
+  ytickValues() {
+    return this.props.ytickValues || (this.IntervalNormalizer && this.IntervalNormalizer.tickValues())
   }
 
   render() {
@@ -30,7 +46,7 @@ export default class Coordinate extends React.Component {
           titlePadding="25"
           label="Median Value" />
 
-        {/* grid */}
+        {/* grid
         <Axis
           orient="bottom"
           outerTickSize="0"
@@ -39,18 +55,20 @@ export default class Coordinate extends React.Component {
           top={props.xTop}
           tickValues={props.gxtickValues}
           tickFormat="" />
+        */}
 
         <Axis
           orient="left"
-          tickValues={props.tickValues || this.IntervalNormalizer.tickValues()}
+          tickValues={this.ytickValues()}
+          tickFormat={props.ytickFormat}
           outerTickSize="0"
-          scale={props.yScale.domain(this.IntervalNormalizer.domain())}
+          scale={this.yScale()}
           top={yTop}
           titlePadding="45"
           textAnchor={props.xtextAnchor || "end"}
           label="No. of Laboratories" />
 
-        {/* grid */}
+        {/* grid
         <Axis
           orient="left"
           tickValues={props.tickValues || this.IntervalNormalizer.tickValues()}
@@ -59,6 +77,7 @@ export default class Coordinate extends React.Component {
           scale={props.yScale.domain(this.IntervalNormalizer.domain())}
           top={yTop}
           tickFormat="" />
+        */}
       </g>
     )
   }
