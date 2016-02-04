@@ -38,7 +38,7 @@ exports.Axis = React.createClass({
 
     var d3_text = d3.select(this.refs.axis)
         .call(d3_axis)
-      .selectAll("tick text")
+      .selectAll(".tick text")
         .style("text-anchor", props.textAnchor || "start");
 
     this._d3_setter(d3_text, { x: props.labelXOffset, y: props.labelYOffset }, ["x", "y"], "attr");

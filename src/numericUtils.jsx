@@ -12,7 +12,7 @@ export class MedianAxisFormatter {
     this.median = +options.median
     this.limit = options.limit * this.median
 
-    _.bindAll(this, 'xtickFormat')
+    _.bindAll(this, 'tickFormat')
   }
 
   binStep(binNum) {
@@ -28,7 +28,7 @@ export class MedianAxisFormatter {
     return this.median + sign * this.limit * sFactor
   }
 
-  xtickFormat(x, i){
+  tickFormat(x, i){
     var label = null
 
     switch(i) {

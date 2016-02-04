@@ -28,10 +28,47 @@ export default class Coordinate extends React.Component {
     return this.props.ytickValues || (this.IntervalNormalizer && this.IntervalNormalizer.tickValues())
   }
 
+  xgrid() {
+    var props = this.props;
+
+    if (props.showXGrid) {
+      return (
+        <Axis
+          orient="bottom"
+          outerTickSize="0"
+          innerTickSize={-d3.max(this.yScale().range())}
+          scale={props.xScale}
+          top={props.xTop}
+          tickValues={props.gxtickValues || props.xtickValues}
+          tickFormat="" />
+      )
+    }
+  }
+
+  ygrid() {
+    var props = this.props;
+
+    if (props.showYGrid) {
+      return (
+        <Axis
+          orient="left"
+          tickValues={props.gytickValues || this.ytickValues()}
+          outerTickSize="0"
+          innerTickSize={-d3.max(props.xScale.range())}
+          scale={this.yScale()}
+          top={this.yTop()}
+          tickFormat="" />
+      )
+    }
+  }
+
+  yTop() {
+    // need to handle < 0 case
+    return this.props.xTop - d3.max(this.props.yScale.range());
+  }
+
   render() {
     var props = this.props;
-    // need to handle < 0 case
-    var yTop = props.xTop - d3.max(props.yScale.range());
 
     return (
       <g transform={`translate(${props.left || 0}, ${props.top || 0})`}>
@@ -46,16 +83,7 @@ export default class Coordinate extends React.Component {
           titlePadding="25"
           label="Median Value" />
 
-        {/* grid
-        <Axis
-          orient="bottom"
-          outerTickSize="0"
-          innerTickSize={-d3.max(props.yScale.range())}
-          scale={props.xScale}
-          top={props.xTop}
-          tickValues={props.gxtickValues}
-          tickFormat="" />
-        */}
+        {this.xgrid()}
 
         <Axis
           orient="left"
@@ -63,21 +91,12 @@ export default class Coordinate extends React.Component {
           tickFormat={props.ytickFormat}
           outerTickSize="0"
           scale={this.yScale()}
-          top={yTop}
+          top={this.yTop()}
           titlePadding="45"
           textAnchor={props.xtextAnchor || "end"}
           label="No. of Laboratories" />
 
-        {/* grid
-        <Axis
-          orient="left"
-          tickValues={props.tickValues || this.IntervalNormalizer.tickValues()}
-          outerTickSize="0"
-          innerTickSize={-d3.max(props.xScale.range())}
-          scale={props.yScale.domain(this.IntervalNormalizer.domain())}
-          top={yTop}
-          tickFormat="" />
-        */}
+        {this.ygrid()}
       </g>
     )
   }

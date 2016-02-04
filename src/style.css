@@ -27,6 +27,21 @@ html body {
   fill: lightGrey;
 }
 
+text.youden-results {
+  fill: grey;
+  font: 15px sans-serif;
+  text-anchor: middle;
+}
+
+text.youden-result {
+  font: 12px sans-serif;
+  text-anchor: middle;
+}
+
+.youden .median {
+  text-anchor: middle;
+}
+
 /*.svg-container {
     display: inline-block;
     position: relative;
