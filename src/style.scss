@@ -34,7 +34,7 @@ text.youden-results {
 }
 
 text.youden-result {
-  font: 12px sans-serif;
+  font: 10px sans-serif;
   text-anchor: middle;
 }
 
@@ -42,18 +42,31 @@ text.youden-result {
   text-anchor: middle;
 }
 
-/*.svg-container {
+.data-to-date {
+  font: 9px sans-serif;
+
+  .col {
+    /*padding-right: 20px;*/
+    min-width: 60px;
+  }
+
+  th.col {
+    text-align: left;
+  }
+}
+
+.svg-container {
     display: inline-block;
     position: relative;
     width: 100%;
-    padding-bottom: 100%;
+    padding-bottom: 0;
     vertical-align: top;
     overflow: hidden;
-}*/
+}
 
 /*.svg-content-responsive {
     display: inline-block;
     position: absolute;
     top: 0px;
-    left: 0;
+    left: 0px;
 }*/
