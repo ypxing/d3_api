@@ -53,6 +53,10 @@ text.youden-result {
   th.col {
     text-align: left;
   }
+
+  tr td:first-child {
+    text-align: right;
+  }
 }
 
 .svg-container {

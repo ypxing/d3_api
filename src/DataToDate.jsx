@@ -21,7 +21,6 @@ export default class DataToDate extends React.Component {
              .data((d) => (['>', d.sampleLabel, d.method, d.median, d.result]))
              .enter()
                .append("td")
-               .attr("align", (d) => ( d === '>' ? 'right' : 'left' ))
                .attr("class", "col")
                .html((d)=>(d))
 
