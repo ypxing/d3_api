@@ -7,10 +7,15 @@ export default class ForeignObject extends React.Component {
 
     return (
       <foreignobject x={props.x} y={props.y} width={props.width} height={props.height}>
-        <body xmlns="http://www.w3.org/1999/xhtml">
-          {props.children}
-        </body>
+        {props.children}
       </foreignobject>
     )
   }
 }
+
+// it doesn't support "body"
+// <foreignobject x={props.x} y={props.y} width={props.width} height={props.height}>
+//   <body xmlns="http://www.w3.org/1999/xhtml">
+//     {props.children}
+//   </body>
+// </foreignobject>
