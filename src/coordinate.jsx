@@ -54,7 +54,7 @@ export default class Coordinate extends React.Component {
           orient="left"
           tickValues={props.gytickValues || this.ytickValues()}
           outerTickSize="0"
-          innerTickSize={-d3.max(props.xScale.range())}
+          innerTickSize={-(+props.ginnerTickSize || d3.max(props.xScale.range()))}
           scale={this.yScale()}
           top={this.yTop()}
           tickFormat="" />
@@ -65,6 +65,10 @@ export default class Coordinate extends React.Component {
   yTop() {
     // need to handle < 0 case
     return this.props.xTop - d3.max(this.props.yScale.range());
+  }
+
+  ytickFormat() {
+    return this.props.ytickFormat || (this.IntervalNormalizer && this.IntervalNormalizer.tickFormat())
   }
 
   render() {
@@ -80,21 +84,23 @@ export default class Coordinate extends React.Component {
           tickValues={props.xtickValues}
           tickFormat={props.xtickFormat}
           textAnchor={props.xtextAnchor || "middle"}
-          titlePadding="25"
-          label="Median Value" />
+          titlePadding={props.xtitlePadding || 25}
+          hideLine={props.xhideLine}
+          label={props.xlabel} />
 
         {this.xgrid()}
 
         <Axis
           orient="left"
           tickValues={this.ytickValues()}
-          tickFormat={props.ytickFormat}
+          tickFormat={this.ytickFormat()}
           outerTickSize="0"
           scale={this.yScale()}
           top={this.yTop()}
-          titlePadding="45"
+          titlePadding={props.ytitlePadding || 45}
           textAnchor={props.xtextAnchor || "end"}
-          label="No. of Laboratories" />
+          hideLine={props.yhideLine}
+          label={props.ylabel} />
 
         {this.ygrid()}
       </g>

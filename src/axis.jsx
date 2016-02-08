@@ -18,12 +18,13 @@ exports.Axis = React.createClass({
   },
 
   _axis_class() {
-    return (this._is_y() ? "x" : "y") + " axis";
+    return (this._is_y() ? "y" : "x") + " axis";
   },
 
   _d3_render: function() {
     var props = this.props;
 
+    this.axis = d3.select(this.refs.axis)
     var d3_axis = d3.svg.axis()
           .tickFormat(d3.format(",.1f"))
           // .tickPadding(10)
@@ -36,12 +37,16 @@ exports.Axis = React.createClass({
     //tickPadding: padding between axis and labels
     this._d3_setter(d3_axis, props, ["tickValues", "innerTickSize", "outerTickSize", "tickFormat", "tickPadding"]);
 
-    var d3_text = d3.select(this.refs.axis)
-        .call(d3_axis)
-      .selectAll(".tick text")
-        .style("text-anchor", props.textAnchor || "start");
+    var d3_text = this.axis
+                      .call(d3_axis)
+                        .selectAll(".tick text")
+                          .style("text-anchor", props.textAnchor || "start");
 
     this._d3_setter(d3_text, { x: props.labelXOffset, y: props.labelYOffset }, ["x", "y"], "attr");
+
+    if (props.hideLine) {
+      this.axis.select("path.domain").remove()
+    }
   },
 
   componentDidUpdate: function() {

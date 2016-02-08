@@ -4,6 +4,12 @@ html body {
   font: 10px sans-serif;
 }
 
+.crisp-edges {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
 .bar rect {
   fill: steelblue;
   shape-rendering: crispEdges;
@@ -18,9 +24,7 @@ html body {
 }
 
 .axis line, .axis path {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
+  @extend .crisp-edges;
 }
 
 .histoShadow {
@@ -74,3 +78,17 @@ text.youden-result {
     top: 0px;
     left: 0px;
 }*/
+
+.levey-jennings {
+  .xlabel {
+    text-anchor: middle;
+  }
+
+  .shadow {
+    fill: lightGrey;
+  }
+
+  .right-line {
+    @extend .crisp-edges;
+  }
+}

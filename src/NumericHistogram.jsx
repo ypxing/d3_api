@@ -62,10 +62,12 @@ class NumericHistogram extends React.Component {
           xtickValues={xtickValues}
           gxtickValues={[xScale.invert(shadowWidth - 1), data[secondIdx + 1].x, d3.max(xScale.domain())]}
           showXGrid={true}
+          xlabel="Median Value"
 
           yScale={yScale}
           showYGrid={true}
-          normalizeYAxis={true} />
+          normalizeYAxis={true}
+          ylabel="No. of Laboratories" />
       </g>
     )
   }

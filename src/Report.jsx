@@ -7,6 +7,7 @@ import NumericYouden from "./NumericYouden"
 import Layout from "./layout"
 import { MedianAxisFormatter } from "./numericUtils"
 import DataToDate from "./DataToDate"
+import LeveyJennings from "./LeveyJennings"
 
 var width = 250, height = 100;
 
@@ -84,6 +85,7 @@ export default class Report extends React.Component {
               width={130} height={150} />
 
             <DataToDate x="30" y="500" width="250" height="500" results={resultsToDate} />
+            <LeveyJennings x="400" y="500" width="250" height="200" sampleCount="2" runCount="6"/>
           </Layout>
         </Page>
         <Page>
