@@ -91,4 +91,13 @@ text.youden-result {
   .right-line {
     @extend .crisp-edges;
   }
+
+  polygon {
+    stroke: black;
+    fill: none;
+  }
+
+  .result-point {
+    text-anchor: middle;
+  }
 }

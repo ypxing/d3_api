@@ -30,7 +30,35 @@ var results = d3.range(1000).map((i)=>({ labno: i, results: [sample1Values[i], s
 
 var resultsToDate = [
   { sampleLabel: '26-07a', method: 'B 13X 004 E', median: 16.8, result: 16.1 },
-  { sampleLabel: '26-07b', method: '', median: 27.0, result: 26.9 }
+  { sampleLabel: '26-07b', method: '', median: 26.6, result: 26.9 }
+]
+
+// [[sample1, sample2], [sample1, sample2]]
+var leveyJenningsData = [
+  [
+    {
+      median: 16.5,
+      limit: 0.1,
+      result: 16.1
+    },
+    {
+      median: 26.6,
+      limit: 0.1,
+      result: 26.9
+    }
+  ],
+  [
+    {
+      median: 5.1,
+      limit: 0.1,
+      result: 4.8
+    },
+    {
+      median: 9.6,
+      limit: 0.1,
+      result: 9.3
+    }
+  ]
 ]
 
 export default class Report extends React.Component {
@@ -85,7 +113,11 @@ export default class Report extends React.Component {
               width={130} height={150} />
 
             <DataToDate x="30" y="500" width="250" height="500" results={resultsToDate} />
-            <LeveyJennings x="400" y="500" width="250" height="200" sampleCount="2" runCount="6"/>
+            <LeveyJennings
+              x="400" y="500"
+              width="250" height="200"
+              sampleCount="2" runCount="6"
+              data={leveyJenningsData} />
           </Layout>
         </Page>
         <Page>

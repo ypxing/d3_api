@@ -4,11 +4,79 @@ import d3 from "d3"
 import Coordinate from "./coordinate"
 
 export default class LeveyJennings extends React.Component {
+
+  _yValue(d) {
+    return (d.result - d.median)/(d.median * d.limit)
+  }
+
+  _d3_render() {
+    this._d3_clear();
+    this.d3LeveyJennings = d3.select(this.refs.leveyJennings).append("g");
+
+    var props = this.props;
+    var xScale = this.xScale();
+    var yScale = this.yScale();
+
+    var points = []
+    props.data.forEach((data, i) => {
+      var sample1 = data[0]
+      var sample2 = data[1]
+      var y1 = yScale(this._yValue(sample1))
+      var y2 = yScale(this._yValue(sample2))
+      y1 = d3.max([y1, y2])
+      y2 = d3.min([y1, y2])
+
+      var x = xScale(i)
+
+      // points.push(`${x},${y1}`)
+      // points.unshift(`${x},${y2}`)
+      points.push([x, y1])
+      points.unshift([x, y2])
+    })
+
+    this.d3LeveyJennings.append("polygon")
+      .attr("points", points)
+
+    this.d3LeveyJennings.selectAll("text.result-point")
+      .data(points)
+      .enter()
+        .append("text")
+        .attr("class", "result-point")
+        .attr("x", (d)=>(d[0]))
+        .attr("y", (d)=>(d[1]))
+        .attr("dy", "0.30em")
+        .text("x")
+  }
+
+  _d3_clear() {
+    if (this.d3LeveyJennings) {
+      this.d3LeveyJennings.remove()
+    }
+  }
+
+  componentDidUpdate() {
+    this._d3_render();
+  }
+
+  componentDidMount() {
+    this._d3_render();
+  }
+
+  xScale() {
+    return d3.scale.ordinal()
+                   .domain(d3.range(+this.props.runCount))
+                   .rangePoints([0, +this.props.width], .3);
+  }
+
+  yScale() {
+    return d3.scale.linear()
+                   .domain([-2.25, 2.25])
+                   .range([+this.props.height, 0])
+  }
+
   render() {
     var props = this.props;
-    var xScale = d3.scale.ordinal()
-                         .domain(d3.range(+props.runCount))
-                         .rangePoints([0, +props.width], .3);
+    var xScale = this.xScale();
 
     var labels = []
     xScale.range().forEach((d, i) => {
@@ -20,9 +88,7 @@ export default class LeveyJennings extends React.Component {
       )
     })
 
-    var yScale = d3.scale.linear()
-                         .domain([-2.25, 2.25])
-                         .range([+props.height, 0])
+    var yScale = this.yScale();
 
     var ytickValues = d3.range(5).map((i)=>(i - 2))//[-2, -1, 0, 2, 1]
     var gytickValues = d3.range(4).map((i)=>(i - 1.5)).concat(ytickValues)
