@@ -28,13 +28,13 @@ export default class LeveyJennings extends React.Component {
 
       var x = xScale(i)
 
-      // points.push(`${x},${y1}`)
-      // points.unshift(`${x},${y2}`)
       points.push([x, y1])
       points.unshift([x, y2])
     })
 
     this.d3LeveyJennings.append("polygon")
+      // npm pattenfills
+      .style("fill", "url(#crosshatch-black)")
       .attr("points", points)
 
     this.d3LeveyJennings.selectAll("text.result-point")
@@ -95,6 +95,13 @@ export default class LeveyJennings extends React.Component {
 
     return (
       <g ref="leveyJennings" className="levey-jennings" transform={`translate(${props.x || 0}, ${props.y || 0})`}>
+        <defs>
+          <pattern id="crosshatch-black" patternUnits="userSpaceOnUse" width="8" height="8">
+            <image xlinkHref="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc4JyBoZWlnaHQ9JzgnPgogIDxyZWN0IHdpZHRoPSc4JyBoZWlnaHQ9JzgnIGZpbGw9JyNmZmYnLz4KICA8cGF0aCBkPSdNMCAwTDggOFpNOCAwTDAgOFonIHN0cm9rZS13aWR0aD0nMC41JyBzdHJva2U9JyMwMDAnLz4KPC9zdmc+Cg==" x="0" y="0" width="8" height="8">
+            </image>
+          </pattern>
+        </defs>
+
         <rect
           height={yScale(1)}
           width={props.width}
