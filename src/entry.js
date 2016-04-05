@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 
 import createStore from './store/store';
 import App from './containers/app';
+import "./style"
 // import { Router, Route, browserHistory } from 'react-router';
 
 // See documentation for https://github.com/rackt/react-redux.
@@ -21,4 +22,6 @@ const AppClient = props => {
 
 const AppComponent = AppClient();
 
-ReactDOM.render(<svg><rect width="79.64516129032258" height="100" /></svg>,  document.getElementById('test'))
+//ReactDOM.render(<svg><rect width="79.64516129032258" height="100" /></svg>,  document.getElementById('test'))
+ReactDOM.render(AppComponent,  document.getElementById('container'))
+
