@@ -1,20 +1,24 @@
-import React from "react"
+import React from 'react';
 import ReactDOM from "react-dom"
-import d3 from "d3"
+import { Provider } from 'react-redux';
 
-import NumericHistogram from "./NumericHistogram"
-import Layout from "./layout"
+import createStore from './store/store';
+import App from './containers/app';
+// import { Router, Route, browserHistory } from 'react-router';
 
-var width = 250, height = 100;
+// See documentation for https://github.com/rackt/react-redux.
+// This is how you get props from the Rails view into the redux store.
+// This code here binds your smart component to the redux store.
+const AppClient = props => {
+  const store = createStore(props);
+  const reactComponent = (
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+  return reactComponent;
+};
 
-ReactDOM.render(
-  <Layout top="20">
-    <NumericHistogram
-      left="80" top="70" target="26.6" limit="0.1"
-      width={width} height={height} />
+const AppComponent = AppClient();
 
-    <NumericHistogram
-      left="800" top="70" target="16.5" limit="0.1"
-      width={width} height={height} />
-  </Layout>,
-  document.getElementById('container'))
+ReactDOM.render(<svg><rect width="79.64516129032258" height="100" /></svg>,  document.getElementById('test'))
