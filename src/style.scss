@@ -1,0 +1,103 @@
+html body {
+  margin: 0px;
+  height: 100%;
+  font: 10px sans-serif;
+}
+
+.crisp-edges {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.bar rect {
+  fill: steelblue;
+  shape-rendering: crispEdges;
+}
+
+.bar text {
+  fill: #fff;
+}
+
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis line, .axis path {
+  @extend .crisp-edges;
+}
+
+.histoShadow {
+  fill: lightGrey;
+}
+
+text.youden-results {
+  fill: grey;
+  font: 15px sans-serif;
+  text-anchor: middle;
+}
+
+text.youden-result {
+  font: 10px sans-serif;
+  text-anchor: middle;
+}
+
+.youden .median {
+  text-anchor: middle;
+}
+
+.data-to-date {
+  font: 9px sans-serif;
+
+  .col {
+    /*padding-right: 20px;*/
+    min-width: 60px;
+  }
+
+  th.col {
+    text-align: left;
+  }
+
+  tr td:first-child {
+    text-align: right;
+  }
+}
+
+.svg-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-bottom: 0;
+    vertical-align: top;
+    overflow: hidden;
+}
+
+/*.svg-content-responsive {
+    display: inline-block;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}*/
+
+.levey-jennings {
+  .xlabel {
+    text-anchor: middle;
+  }
+
+  .shadow {
+    fill: lightGrey;
+  }
+
+  .right-line {
+    @extend .crisp-edges;
+  }
+
+  polygon {
+    stroke: black;
+    fill: none;
+  }
+
+  .result-point {
+    text-anchor: middle;
+  }
+}

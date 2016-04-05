@@ -62,4 +62,8 @@ export default class IntervalNormalizer {
 
     return _ticks;
   }
+
+  tickFormat() {
+    return d3.format(".0f")
+  }
 }

@@ -7,7 +7,7 @@ module.exports = {
       filename: "bundle.js"
   },
   resolve: {
-    extensions: ['', '.coffee', '.js', '.jsx']
+    extensions: ['', '.coffee', '.js', '.jsx', '.scss']
   },
   devtool: 'source-map',
   module: {
@@ -19,6 +19,10 @@ module.exports = {
         include: path.join(__dirname, 'src'),
         loaders: ['react-hot', 'babel?presets[]=react,presets[]=es2015']
       },
+      {
+        test: /\.scss$/,
+        loaders: ["style", "css", "sass"]
+      }
       //{ test: require.resolve("react"), loader: "imports?shim=es5-shim/es5-shim&sham=es5-shim/es5-sham" }
     ]
   }
