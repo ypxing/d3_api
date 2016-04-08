@@ -4,7 +4,12 @@ import { bindActionCreators } from 'redux';
 import Immutable from 'immutable';
 import * as analyteActions from '../actions/analyte';
 
-import { Layout, NumericHistogram } from "react-d3-render"
+//import { Layout, NumericHistogram } from "react-d3-render"
+import Layout from "../components/layout"
+import NumericHistogram from "../components/NumericHistogram"
+
+import { parseString } from 'xml2js';
+import componentRegistry from "../component-registry"
 
 function select(state) {
   // Which part of the Redux global state does our component want to receive as props?
@@ -19,6 +24,7 @@ class App extends React.Component {
     const { dispatch, programInfo } = this.props;
     // const db = this.props.params.db;
     this.actions = bindActionCreators(analyteActions, dispatch);
+    this.state = {}
   }
 
   // static propTypes = {
@@ -29,7 +35,20 @@ class App extends React.Component {
   // }
 
   componentDidMount() {
-    this.actions.loadAnalyte('anat', 'ID', 16, 1)
+//    this.actions.loadAnalyte('anat', 'ID', 16, 1)
+    /*
+    if (!this.state.subComponents) {
+      var xml = '<NumericHistogram left="80" top="50" width="250" height="100" analyteIndex="1" sample="0"/>'
+      var that = this;
+      parseString(xml, function (err, result) {
+        var key = Object.keys(result)[0];
+          var com = { key: componentRegistry.getComponent(key)}
+          var sub = <com.key {...result[key].$}/>
+          that.setState({ subComponents: sub })
+      });
+    }
+    */
+
   }
 
   render() {
@@ -37,6 +56,11 @@ class App extends React.Component {
     // This uses the ES2015 spread operator to pass properties as it is more DRY
     // This is equivalent to:
     // <HelloWorldWidget $$helloWorldStore={$$helloWorldStore} actions={actions} />
+
+    return <Layout top="20">{this.state.subComponents}</Layout>
+//    return <Layout top="20"></Layout>
+
+/*
     return (
       <Layout top="20">
         <NumericHistogram
@@ -48,6 +72,7 @@ class App extends React.Component {
           width={250} height={100} />
       </Layout>
     );
+*/
   }
 }
 

@@ -4,7 +4,9 @@ import ReactDOM from "react-dom"
 
 import createHistogram from "./HistogramFactory"
 import Coordinate from "./coordinate"
-import { MedianAxisFormatter } from "./numericUtils"
+import { MedianAxisFormatter } from "../numericUtils"
+
+import componentRegistry from "../component-registry"
 
 class NumericHistogram extends React.Component {
   constructor(props, context) {
@@ -73,4 +75,6 @@ class NumericHistogram extends React.Component {
   }
 }
 
-export default createHistogram(NumericHistogram)
+var newComp = createHistogram(NumericHistogram)
+componentRegistry.setComponent('NumericHistogram', newComp)
+export default newComp
