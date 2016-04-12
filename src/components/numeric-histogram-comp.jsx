@@ -2,13 +2,13 @@ import d3 from "d3"
 import React from "react"
 import ReactDOM from "react-dom"
 
-import createHistogram from "./HistogramFactory"
+import createHistogram from "./histogram-factory"
 import Coordinate from "./coordinate"
-import { MedianAxisFormatter } from "../numericUtils"
+import { MedianAxisFormatter } from "../numeric-utils"
 
 import componentRegistry from "../component-registry"
 
-class NumericHistogram extends React.Component {
+class NumericHistogramComp extends React.Component {
   constructor(props, context) {
     super(props, context)
     this.binNum = 31
@@ -75,6 +75,5 @@ class NumericHistogram extends React.Component {
   }
 }
 
-var newComp = createHistogram(NumericHistogram)
-componentRegistry.setComponent('NumericHistogram', newComp)
+var newComp = createHistogram(NumericHistogramComp)
 export default newComp

@@ -1,13 +1,13 @@
 import React from "react"
 import d3 from "d3"
 
-import Page from "./page"
-import NumericHistogram from "./NumericHistogram"
-import NumericYouden from "./NumericYouden"
-import Layout from "./layout"
-import { MedianAxisFormatter } from "./numericUtils"
-import DataToDate from "./DataToDate"
-import LeveyJennings from "./LeveyJennings"
+import Page from "../components/page"
+import NumericHistogram from "./numeric-histogram"
+import NumericYouden from "../components/numeric-youden"
+import Layout from "../components/layout"
+import { MedianAxisFormatter } from "../numeric-utils"
+import DataToDate from "../components/data-to-date"
+import LeveyJennings from "../components/levey-jennings"
 
 var width = 250, height = 100;
 

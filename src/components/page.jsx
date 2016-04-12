@@ -21,7 +21,7 @@ export default class Page extends React.Component {
 // <image xlinkHref="https://mdn.mozillademos.org/files/2917/fxlogo.png" x="10" y="10" height="100" width="100" />
 
 
-// let use foreignobject first. ie doesn't support foreignobject.
+// let use foreignobject first. IE doesn't support foreignobject.
 // <div className="page">
 //   <svg
 //     className="svg-content-responsive" preserveAspectRatio="xMinYMin meet"

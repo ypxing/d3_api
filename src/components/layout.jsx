@@ -2,7 +2,6 @@ import d3 from "d3"
 import React from "react"
 
 import Header from "./header"
-import componentRegistry from "../component-registry"
 
 export default class Layout extends React.Component {
   render() {
@@ -15,5 +14,3 @@ export default class Layout extends React.Component {
     )
   }
 }
-
-componentRegistry.setComponent('Layout', Layout)

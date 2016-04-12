@@ -6,10 +6,12 @@ import * as analyteActions from '../actions/analyte';
 
 //import { Layout, NumericHistogram } from "react-d3-render"
 import Layout from "../components/layout"
-import NumericHistogram from "../components/NumericHistogram"
+//import NumericHistogram from "../components/NumericHistogram"
+import NumericHistogram from "./numeric-histogram"
 
 import { parseString } from 'xml2js';
 import componentRegistry from "../component-registry"
+import Report from "./report"
 
 function select(state) {
   // Which part of the Redux global state does our component want to receive as props?
@@ -57,8 +59,9 @@ class App extends React.Component {
     // This is equivalent to:
     // <HelloWorldWidget $$helloWorldStore={$$helloWorldStore} actions={actions} />
 
-    return <Layout top="20">{this.state.subComponents}</Layout>
-//    return <Layout top="20"></Layout>
+//    return <Layout top="20">{this.state.subComponents}</Layout>
+//    return <Layout top="20"><NumericHistogram left="80" top="50" median="26.6" limit="0.1" analyteIndex="1" sample="0" /></Layout>
+    return <Report />
 
 /*
     return (

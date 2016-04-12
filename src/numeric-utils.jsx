@@ -1,5 +1,5 @@
 import _ from "lodash"
-import decimalAdjust from "./decimalRounding"
+import decimalAdjust from "./decimal-rounding"
 
 // 5.4999 is used in QDS
 // it is for 31 bins

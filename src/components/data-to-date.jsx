@@ -2,7 +2,7 @@ import React from "react"
 import d3 from "d3"
 import _ from "lodash"
 
-import ForeignObject from "./ForeignObject"
+import ForeignObject from "./foreign-object"
 
 export default class DataToDate extends React.Component {
   _d3_render() {

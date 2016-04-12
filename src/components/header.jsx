@@ -1,5 +1,5 @@
 import d3 from "d3"
-import React from "react"
+import React, { PropTypes } from "react"
 import moment from "moment"
 
 export default class Header extends React.Component {

@@ -2,7 +2,7 @@ import d3 from "d3"
 import React from "react"
 import ReactDOM from "react-dom"
 
-import { MedianAxisFormatter } from "./numericUtils"
+import { MedianAxisFormatter } from "../numeric-utils"
 import Coordinate from "./coordinate"
 
 // median/limit
